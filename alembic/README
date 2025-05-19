@@ -1,0 +1,21 @@
+Generic single-database configuration with an async engine.
+
+Команды для управления миграциями:
+
+# Создание новой миграции:
+alembic revision --autogenerate -m "описание миграции"
+
+# Обновление базы до последней версии:
+alembic upgrade head
+
+# Откат на одну миграцию назад:
+alembic downgrade -1
+
+# Откат до определенной версии:
+alembic downgrade <revision>
+
+# Просмотр текущей версии:
+alembic current
+
+# Просмотр истории миграций:
+alembic history

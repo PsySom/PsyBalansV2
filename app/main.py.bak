@@ -1,0 +1,29 @@
+from fastapi import FastAPI, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import text
+from .database import check_postgres_connection, check_mongodb_connection, get_db
+
+app = FastAPI(title="PsyBalans API")
+
+@app.get("/")
+async def read_root():
+    return {"Hello": "PsyBalans API"}
+
+@app.get("/check-db")
+async def check_database():
+    pg_success, pg_message = await check_postgres_connection()
+    mongo_success, mongo_message = await check_mongodb_connection()
+    
+    return {
+        "postgresql": {"success": pg_success, "message": pg_message},
+        "mongodb": {"success": mongo_success, "message": mongo_message}
+    }
+
+@app.get("/check-tables")
+async def check_tables(db: AsyncSession = Depends(get_db)):
+    try:
+        result = await db.execute(text("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"))
+        tables = [row[0] for row in result]
+        return {"success": True, "tables": tables}
+    except Exception as e:
+        return {"success": False, "error": str(e)}

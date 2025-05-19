@@ -1,0 +1,58 @@
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import MetaData
+import os
+from dotenv import load_dotenv
+import asyncio
+from motor.motor_asyncio import AsyncIOMotorClient
+
+load_dotenv()
+
+# PostgreSQL подключение
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
+
+# MongoDB подключение
+MONGODB_URI = os.getenv("MONGODB_URI")
+
+# Создаем асинхронный движок SQLAlchemy
+engine = create_async_engine(SQLALCHEMY_DATABASE_URL, echo=True)
+
+# Создаем асинхронную фабрику сессий
+AsyncSessionLocal = sessionmaker(
+    engine, class_=AsyncSession, expire_on_commit=False
+)
+
+# Создаем базовый класс для ORM-моделей
+Base = declarative_base()
+
+# Создаем объект метаданных
+metadata = MetaData()
+
+# MongoDB клиент
+mongo_client = AsyncIOMotorClient(MONGODB_URI)
+mongo_db = mongo_client.get_database("psybalans")  # Укажите имя вашей базы данных
+
+# Функция для получения соединения с PostgreSQL
+async def get_db():
+    async with AsyncSessionLocal() as session:
+        try:
+            yield session
+        finally:
+            await session.close()
+
+# Функция для проверки подключения к PostgreSQL
+async def check_postgres_connection():
+    try:
+        async with engine.begin() as conn:
+            await conn.execute("SELECT 1")
+            return True, "Подключение к PostgreSQL успешно"
+    except Exception as e:
+        return False, f"Ошибка подключения к PostgreSQL: {str(e)}"
+
+# Функция для проверки подключения к MongoDB
+async def check_mongodb_connection():
+    try:
+        await mongo_db.command("ping")
+        return True, "Подключение к MongoDB успешно"
+    except Exception as e:
+        return False, f"Ошибка подключения к MongoDB: {str(e)}"
