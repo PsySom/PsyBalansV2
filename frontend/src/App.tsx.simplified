@@ -1,0 +1,46 @@
+// src/App.tsx.simplified
+// Упрощенная версия с настройками future для React Router v7
+import { Box } from '@chakra-ui/react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { routerFutureConfig } from './router-config'
+import { Header } from './components'
+import {
+  Home,
+  About,
+  Onboarding,
+  Dashboard,
+  Calendar,
+  Diaries,
+  State,
+  Recommendations,
+  Profile,
+  ScienceBase,
+  NotificationCenter,
+  NotFound
+} from './pages'
+
+function App() {
+  return (
+    <Router future={routerFutureConfig}>
+      <Box as="main" minH="100vh">
+        <Header />
+        <Routes future={routerFutureConfig}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/diaries" element={<Diaries />} />
+          <Route path="/state" element={<State />} />
+          <Route path="/recommendations" element={<Recommendations />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/notifications" element={<NotificationCenter />} />
+          <Route path="/science" element={<ScienceBase />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Box>
+    </Router>
+  )
+}
+
+export default App
