@@ -1,0 +1,21 @@
+Шаги для исправления фронтенда в PowerShell:
+
+1. Сначала выполните в PowerShell:
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+2. Перейдите в папку frontend:
+cd "C:\Users\somov\OneDrive\Рабочий стол\PsyBalansV2\frontend"
+
+3. Удалите node_modules и package-lock.json:
+Remove-Item -Recurse -Force .\node_modules -ErrorAction SilentlyContinue
+Remove-Item -Force .\package-lock.json -ErrorAction SilentlyContinue
+
+4. Установите зависимости с более низкой версией vite:
+npm install vite@4.5.1 --save-dev
+npm install --legacy-peer-deps
+
+5. Запустите dev-сервер:
+npm run dev
+
+Если всё еще возникают проблемы, попробуйте выполнить:
+npm install @rollup/rollup-win32-x64-msvc --no-save
