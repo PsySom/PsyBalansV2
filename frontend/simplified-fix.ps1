@@ -27,6 +27,7 @@ $packageJson = @{
         "react" = "^18.2.0"
         "react-dom" = "^18.2.0"
         "react-router-dom" = "^6.14.0"
+        "swiper" = "^11.0.0"
         "zustand" = "^4.4.0"
     }
     devDependencies = @{
