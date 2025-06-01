@@ -30,13 +30,12 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^2.0.0",
     "@eslint/js": "^8.56.0",
-    "@storybook/addon-essentials": "^7.6.17",
-    "@storybook/addon-onboarding": "^1.0.11",
-    "@storybook/blocks": "^7.6.17",
-    "@storybook/experimental-addon-test": "^7.6.17",
-    "@storybook/react": "^7.6.17",
-    "@storybook/react-vite": "^7.6.17",
-    "@storybook/test": "^7.6.17",
+    "@storybook/addon-essentials": "^7.0.0",
+    "@storybook/addon-onboarding": "^1.0.0",
+    "@storybook/blocks": "^7.0.0",
+    "@storybook/react": "^7.0.0",
+    "@storybook/react-vite": "^7.0.0",
+    "@storybook/test": "^7.0.0",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.4.1",
@@ -48,11 +47,12 @@
     "eslint-plugin-storybook": "^0.6.15",
     "globals": "^13.24.0",
     "playwright": "^1.40.1",
-    "storybook": "^7.6.17",
+    "storybook": "^7.0.0",
     "typescript": "~5.3.3",
-    "typescript-eslint": "^6.21.0",
-    "vite": "^5.1.4",
-    "vitest": "^1.1.3"
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0"
   },
   "eslintConfig": {
     "extends": [

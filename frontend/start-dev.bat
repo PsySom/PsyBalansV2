@@ -1,0 +1,3 @@
+@echo off
+echo Запуск сервера разработки...
+npm run dev
