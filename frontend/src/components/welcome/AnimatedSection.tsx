@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, BoxProps } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
-// Extending BoxProps directly
-interface AnimatedSectionProps extends Omit<BoxProps, 'transition' | 'transform'> {
+// Using type for Box component props
+interface AnimatedSectionProps extends Omit<React.ComponentProps<typeof Box>, 'transition' | 'transform'> {
   children: React.ReactNode;
   direction?: 'up' | 'down' | 'left' | 'right';
   delay?: number;
