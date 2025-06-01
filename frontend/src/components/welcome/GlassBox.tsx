@@ -32,7 +32,6 @@ const GlassBox: React.FC<GlassBoxProps> = ({
     <Box
       bg={bgColor}
       backdropFilter={`blur(${blurStrength}px)`}
-      WebkitBackdropFilter={`blur(${blurStrength}px)`}
       borderWidth="1px"
       borderColor={borderColor}
       borderRadius="md"
@@ -46,6 +45,8 @@ const GlassBox: React.FC<GlassBoxProps> = ({
             `rgba(26, 32, 44, ${opacity + 0.1})`
           ),
         },
+        // Для Safari и других WebKit браузеров
+        WebkitBackdropFilter: `blur(${blurStrength}px)`,
         ...props.sx
       }}
     >
